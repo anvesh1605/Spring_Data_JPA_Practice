@@ -3,24 +3,33 @@ spring:
     name: store
     #setting springDataJpa
   dataSource:
-    url: jdbc:mysql://localhost:3306/store?createDatabaseIfNotExist=true
+#    url: jdbc:mysql://localhost:3306/store?createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:3306/store_temp?createDatabaseIfNotExist=true
+#    temporarily changed db name to test the hibernate method of creating tables at run time
     username: root
     password: test1234
   flyway:
     enabled: true
     locations: classpath:db/migration
 
+  jpa:
+    hibernate:
+      ddl-auto: create
 
 
 
-stripe:
-  apiUrl : https://api.stripe.com
-  timeout: 1000
-  enabled: true
-  supported-currencies : usd,eur,gbp
-mail:
-  host: anvesh@gmail.com
-  port: 5761
 
-payment-gateway: stripe
+
+
+
+#stripe:
+#  apiUrl : https://api.stripe.com
+#  timeout: 1000
+#  enabled: true
+#  supported-currencies : usd,eur,gbp
+#mail:
+#  host: anvesh@gmail.com
+#  port: 5761
+#
+#payment-gateway: stripe
 
