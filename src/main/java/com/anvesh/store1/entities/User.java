@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -38,6 +40,22 @@ public class User {
         addresses.remove(address);
         address.setUser(null);
     }
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_tags",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id")
+    )
+    @Builder.Default
+    private Set<Tag> tags = new HashSet<>();
+    public void addTag(String tagName) {
+        var tag1 = new Tag(tagName);
+        tags.add(tag1);
+        tag1.getUsers().add(this);
+    }
+
+
 
 }
 

@@ -1,6 +1,7 @@
 package com.anvesh.store1;
 
 import com.anvesh.store1.entities.Address;
+import com.anvesh.store1.entities.Tag;
 import com.anvesh.store1.entities.User;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -31,6 +32,9 @@ public class Store1Application {
 //       user.getAddresses().add(address);
 //       address.setUser(user);
         user.addAddress(address);
+        System.out.println(user);
+
+        user.addTag("tag1");
         System.out.println(user);
 
     }
