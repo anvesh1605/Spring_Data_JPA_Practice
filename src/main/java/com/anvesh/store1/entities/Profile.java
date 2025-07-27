@@ -21,10 +21,16 @@ public class Profile {
     private Long id;
     @Column(name="bio",nullable = false)
     private String bio;
-    @Column(name="phoneNumber",nullable = false)
+    @Column(name="phoneNumber")
     private String phoneNumber;
-    @Column(name="dateOfBirth",nullable = false)
+    @Column(name="dateOfBirth")
     private Date dateOfBirth;
-    @Column(name="loyalty_Points",nullable = false)
+    @Column(name="loyalty_Points")
     private int loyaltyPoints;
+
+    @OneToOne
+    @JoinColumn(name = "id")
+    @MapsId
+    @ToString.Exclude
+    private User user;
 }

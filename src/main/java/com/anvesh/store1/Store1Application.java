@@ -1,6 +1,7 @@
 package com.anvesh.store1;
 
 import com.anvesh.store1.entities.Address;
+import com.anvesh.store1.entities.Profile;
 import com.anvesh.store1.entities.Tag;
 import com.anvesh.store1.entities.User;
 import org.springframework.boot.SpringApplication;
@@ -29,12 +30,19 @@ public class Store1Application {
                .state("state")
                .zip("zip")
                .build();
+
+       var profile = Profile.builder()
+               .bio("bio")
+                       .build();
 //       user.getAddresses().add(address);
 //       address.setUser(user);
         user.addAddress(address);
         System.out.println(user);
 
         user.addTag("tag1");
+        System.out.println(user);
+
+        user.addProfile(profile);
         System.out.println(user);
 
     }
