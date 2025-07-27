@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Store1Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(Store1Application.class, args);
+//        SpringApplication.run(Store1Application.class, args);
 
 //        var user = new User(1L,"Anvesh","email","password");
 //        user.setId(1L);
