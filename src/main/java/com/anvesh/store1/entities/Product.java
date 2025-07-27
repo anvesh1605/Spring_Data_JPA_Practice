@@ -32,6 +32,6 @@ public class Product {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @ManyToMany(mappedBy = "users")
+    @ManyToMany(mappedBy = "products")
     private Set<User>users = new HashSet<>();
 }
