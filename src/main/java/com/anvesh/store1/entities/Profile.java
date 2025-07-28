@@ -23,7 +23,7 @@ public class Profile {
     private String bio;
     @Column(name="phoneNumber")
     private String phoneNumber;
-    @Column(name="dateOfBirth")
+    @Column(name="date_of_birth")
     private Date dateOfBirth;
     @Column(name="loyalty_Points")
     private int loyaltyPoints;

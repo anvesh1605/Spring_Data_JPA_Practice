@@ -3,6 +3,7 @@ package com.anvesh.store1.entities;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -33,5 +34,6 @@ public class Product {
     private Category category;
 
     @ManyToMany(mappedBy = "products")
+    @ToString.Exclude
     private Set<User>users = new HashSet<>();
 }

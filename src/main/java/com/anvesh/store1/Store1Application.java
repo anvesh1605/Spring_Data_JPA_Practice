@@ -56,7 +56,11 @@ public class Store1Application {
                 .build();
         var repository = context.getBean(UserRepository.class);
         repository.save(user1);
+        user1.addProfile(profile);
 
+//        var user_find =repository.findById(1L).orElseThrow(); // this is causing error
+//        System.out.println(user11);// we will get an exception if we run like this,LazyInitializationException
+//        System.out.println(user_find.getEmail());
     }
 
 }
