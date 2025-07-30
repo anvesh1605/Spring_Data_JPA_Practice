@@ -21,14 +21,14 @@ public class Profile {
     private Long id;
     @Column(name="bio",nullable = false)
     private String bio;
-    @Column(name="phoneNumber")
+    @Column(name = "phone_number")
     private String phoneNumber;
     @Column(name="date_of_birth")
     private Date dateOfBirth;
     @Column(name="loyalty_Points")
     private int loyaltyPoints;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id")
     @MapsId
     @ToString.Exclude

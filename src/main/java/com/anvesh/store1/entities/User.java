@@ -28,8 +28,9 @@ public class User {
     @Column(nullable = false,name = "password")
     private String password;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",cascade = CascadeType.PERSIST)
     @Builder.Default
+    @ToString.Exclude
     private List<Address> addresses = new ArrayList<>();//this kind of initializations are skipped
 //    use the builder.default annotaion to tell take care of this kind of initializations when building an object
     public void addAddress(Address address) {
@@ -48,6 +49,7 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "tag_id")
     )
     @Builder.Default
+    @ToString.Exclude
     private Set<Tag> tags = new HashSet<>();
     public void addTag(String tagName) {
         var tag1 = new Tag(tagName);
@@ -69,6 +71,7 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
+    @ToString.Exclude
     private Set<Product> products = new HashSet<>();
 
 

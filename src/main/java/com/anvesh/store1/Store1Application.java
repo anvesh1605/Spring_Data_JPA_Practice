@@ -57,7 +57,7 @@ public class Store1Application {
 //                .password("ppp1")
 //                .email("email@gmail.com")
 //                .build();
-//        var repository = context.getBean(UserRepository.class);
+        var repository = context.getBean(UserRepository.class);
 //        repository.save(user);
 //        user.addProfile(profile);
 
@@ -67,7 +67,12 @@ public class Store1Application {
 //        repository.findAll().forEach(System.out::println);
 
         var service = context.getBean(UserService.class);
-        service.showEntityStates();
+//        service.showEntityStates();
+//        service.showRelatedEntities();
+
+        service.showAddresses();
+
+
 
     }
 
