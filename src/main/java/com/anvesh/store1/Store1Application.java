@@ -70,7 +70,8 @@ public class Store1Application {
 //        service.showEntityStates();
 //        service.showRelatedEntities();
 
-        service.showAddresses();
+//        service.showAddresses();
+        service.deleteRelated();
 
 
 

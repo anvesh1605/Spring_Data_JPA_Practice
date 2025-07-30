@@ -28,7 +28,7 @@ public class User {
     @Column(nullable = false,name = "password")
     private String password;
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "user",cascade = {CascadeType.REMOVE,CascadeType.REMOVE},orphanRemoval = true)
     @Builder.Default
     @ToString.Exclude
     private List<Address> addresses = new ArrayList<>();//this kind of initializations are skipped
@@ -57,7 +57,7 @@ public class User {
         tag1.getUsers().add(this);
     }
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user",cascade = CascadeType.REMOVE)
     private Profile profile;
 
     public void addProfile(Profile profile) {
