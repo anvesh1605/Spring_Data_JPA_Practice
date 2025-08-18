@@ -1,15 +1,17 @@
 package com.anvesh.store1.services;
 
 import com.anvesh.store1.entities.Address;
+import com.anvesh.store1.entities.Product;
 import com.anvesh.store1.entities.User;
-import com.anvesh.store1.repositories.AddressRepository;
-import com.anvesh.store1.repositories.ProfileRepository;
-import com.anvesh.store1.repositories.UserRepository;
+import com.anvesh.store1.repositories.*;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.apache.catalina.Store;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
 
 @AllArgsConstructor
 @Service
@@ -20,6 +22,8 @@ public class UserService {
     private final ProfileRepository profileRepository;
 
     private final EntityManager entityManager;
+    private final CategoryRepository categoryRepository;
+    private final ProductRepository productRepository;
     // this "entityManager" is responsible for managing the entity persistence context
 
     @Transactional  // will make the boundary of transaction long
@@ -57,7 +61,7 @@ public class UserService {
         // when this line starts transaction starts and when it ends transaction ends with these line
         System.out.println(profile.getBio());
         System.out.println(profile.getUser().getEmail());//this doesn't come in transaction
-        //to tackle this issue we keep this whole method as a transaction with the annotation
+        //to tackle this issue, we keep this whole method as a transaction with the annotation
     }
 
     public void showAddresses()
@@ -91,5 +95,30 @@ public class UserService {
         var address = user.getAddresses().get(0);
         user.removeAddress(address);
         userRepository.save(user);
+    }
+
+    @Transactional
+    public void manageProducts()
+    {
+//        step 2 8.9
+//        var category = categoryRepository.findById((byte) 1).orElseThrow();
+//
+//        var product = Product.builder()
+//                .name(12L)
+//                .description("dessc")
+//                .price(BigDecimal.valueOf(15000.55))
+//                .category(category)
+//                .build();
+//        productRepository.save(product);
+
+        //step 3 8.9
+//        var user = userRepository.findById(3L).orElseThrow();
+//        var products = productRepository.findAll();
+//        products.forEach(user::addFavouriteProduct);
+//        userRepository.save(user);
+
+        //step 4 8.9
+
+        productRepository.deleteById(3L);
     }
 }

@@ -28,7 +28,7 @@ public class User {
     @Column(nullable = false,name = "password")
     private String password;
 
-    @OneToMany(mappedBy = "user",cascade = {CascadeType.REMOVE,CascadeType.REMOVE},orphanRemoval = true)
+    @OneToMany(mappedBy = "user",cascade = {CascadeType.REMOVE,CascadeType.REMOVE },orphanRemoval = true)
     @Builder.Default
     @ToString.Exclude
     private List<Address> addresses = new ArrayList<>();//this kind of initializations are skipped
@@ -72,7 +72,11 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
     @ToString.Exclude
-    private Set<Product> products = new HashSet<>();
+    private Set<Product> favouriteProducts = new HashSet<>();
+
+    public void addFavouriteProduct(Product product) {
+        favouriteProducts.add(product);
+    }
 
 
 }

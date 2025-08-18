@@ -6,6 +6,7 @@ import com.anvesh.store1.entities.Tag;
 import com.anvesh.store1.entities.User;
 import com.anvesh.store1.repositories.UserRepository;
 import com.anvesh.store1.services.UserService;
+import com.anvesh.store1.services.productService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -66,13 +67,16 @@ public class Store1Application {
 //        System.out.println(user_find);
 //        repository.findAll().forEach(System.out::println);
 
-        var service = context.getBean(UserService.class);
+//        var service = context.getBean(UserService.class);
 //        service.showEntityStates();
 //        service.showRelatedEntities();
 
 //        service.showAddresses();
-        service.deleteRelated();
-
+//        service.deleteRelated();
+//          var service = context.getBean(productService.class);
+//          service.createProduct();
+        var service = context.getBean(UserService.class);
+        service.manageProducts();
 
 
     }
