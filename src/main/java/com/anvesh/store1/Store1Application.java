@@ -76,8 +76,8 @@ public class Store1Application {
 //          var service = context.getBean(productService.class);
 //          service.createProduct();
         var service = context.getBean(UserService.class);
-        service.manageProducts();
-
+//        service.manageProducts();
+        service.updateProductPrices();
 
     }
 

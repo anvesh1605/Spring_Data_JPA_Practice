@@ -121,4 +121,11 @@ public class UserService {
 
         productRepository.deleteById(3L);
     }
+
+    //for update methods wrap it in a transactional annotation
+    @Transactional
+    public void updateProductPrices()
+    {
+        productRepository.updatePriceByCategory(1,BigDecimal.valueOf(10));
+    }
 }
