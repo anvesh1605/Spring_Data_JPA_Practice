@@ -145,4 +145,19 @@ public class UserService {
         var user = userRepository.findByName("john").orElseThrow();
         System.out.println(user);
     }
+    @Transactional
+    public void fetchUsers()
+    {
+        var users = userRepository.findAll();
+        users.forEach( (User u) -> {
+            System.out.println(u);
+            u.getAddresses().forEach(System.out::println);
+        });
+        var usersAddr = userRepository.findAllWithAddresses();
+        usersAddr.forEach( (User u) -> {
+            System.out.println(u);
+            u.getAddresses().forEach(System.out::println);
+        });
+
+    }
 }

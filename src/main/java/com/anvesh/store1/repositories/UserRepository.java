@@ -2,8 +2,10 @@ package com.anvesh.store1.repositories;
 
 import com.anvesh.store1.entities.User;
 import org.springframework.data.jpa.repository.EntityGraph;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository extends CrudRepository<User, Long> {
@@ -16,5 +18,9 @@ public interface UserRepository extends CrudRepository<User, Long> {
     //we can also pass nested relations like if the address entity also has relation with country we can use
     //addresses.country
     Optional<User> findByName(String username);
+
+    @EntityGraph(attributePaths = {"addresses"})
+    @Query("select u from User u") //because we broke the convention of hibernate we should write this line
+    List<User> findAllWithAddresses();
 
 }
