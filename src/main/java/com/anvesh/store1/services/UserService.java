@@ -1,9 +1,7 @@
 package com.anvesh.store1.services;
 
-import com.anvesh.store1.entities.Address;
-import com.anvesh.store1.entities.Category;
-import com.anvesh.store1.entities.Product;
-import com.anvesh.store1.entities.User;
+import com.anvesh.store1.dtos.UserSummary;
+import com.anvesh.store1.entities.*;
 import com.anvesh.store1.repositories.*;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
@@ -159,6 +157,27 @@ public class UserService {
         usersAddr.forEach( (User u) -> {
             System.out.println(u);
             u.getAddresses().forEach(System.out::println);
+        });
+
+    }
+
+    @Transactional
+    public void fetchProfiles()
+    {
+//        var profiles = profileRepository.findByLoyaltyPointsGreaterThan(6);
+//        profiles.forEach(System.out::println);
+//
+//        profiles.forEach((Profile p)->{
+//            System.out.println(p.getId());
+//            System.out.println(p.getUser().getEmail());
+//        });
+
+        var users = userRepository.findLoyalUsers(11);
+        users.forEach(System.out::println);
+
+        users.forEach((UserSummary u)->{
+            System.out.println(u.getId());
+            System.out.println(u.getEmail());
         });
 
     }
