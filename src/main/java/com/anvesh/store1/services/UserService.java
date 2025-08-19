@@ -130,12 +130,14 @@ public class UserService {
         productRepository.updatePriceByCategory(1,BigDecimal.valueOf(10));
     }
 
+    @Transactional
     public void fetchProducts()
     {
 //        var products = productRepository.findByCategory(new Category((byte)1));// for getting all colums
         //will use dtos to retrieve particular column values
 
-        var products = productRepository.findByCategory(new Category((byte)1));
+//        var products = productRepository.findByCategory(new Category((byte)1));
+        var products = productRepository.findProducts(BigDecimal.valueOf(1),BigDecimal.valueOf(10));
         products.forEach(System.out::println);
     }
 
