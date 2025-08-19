@@ -8,6 +8,8 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.apache.catalina.Store;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -135,8 +137,30 @@ public class UserService {
         //will use dtos to retrieve particular column values
 
 //        var products = productRepository.findByCategory(new Category((byte)1));
-        var products = productRepository.findProducts(BigDecimal.valueOf(1),BigDecimal.valueOf(10));
-        products.forEach(System.out::println);
+//        var products = productRepository.findProducts(BigDecimal.valueOf(1),BigDecimal.valueOf(10));
+//        products.forEach(System.out::println);
+
+        //QueryByExample 10.1
+        //till now we are using crud repo but now we are using jparepository where the methods are flush(),deleteAllInBatch(),findAll(example) and also crud repo methods
+
+        var product = new Product();
+        product.setName(11L);
+//        var example = Example.of(product);
+//        productRepository.findAll(example).forEach(System.out::println);
+
+        /*
+        limitations:
+            --No support for nested properties
+            --No support for matching collections/maps
+            --Database-specific support for matching strings
+            --Exact matching for other types (e.g. numbers/dates)
+         */
+        var matcher =ExampleMatcher.matching()
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING)
+                .withIncludeNullValues()
+                .withIgnorePaths("name");// to ignore any fields or related entities
+        var example = Example.of(product,matcher);
+        productRepository.findAll(example).forEach(System.out::println);
     }
 
     @Transactional
