@@ -1,6 +1,7 @@
 package com.anvesh.store1.services;
 
 import com.anvesh.store1.entities.Address;
+import com.anvesh.store1.entities.Category;
 import com.anvesh.store1.entities.Product;
 import com.anvesh.store1.entities.User;
 import com.anvesh.store1.repositories.*;
@@ -127,5 +128,14 @@ public class UserService {
     public void updateProductPrices()
     {
         productRepository.updatePriceByCategory(1,BigDecimal.valueOf(10));
+    }
+
+    public void fetchProducts()
+    {
+//        var products = productRepository.findByCategory(new Category((byte)1));// for getting all colums
+        //will use dtos to retrieve particular column values
+
+        var products = productRepository.findByCategory(new Category((byte)1));
+        products.forEach(System.out::println);
     }
 }

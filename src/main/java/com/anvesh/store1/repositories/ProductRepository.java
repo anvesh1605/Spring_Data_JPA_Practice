@@ -1,5 +1,8 @@
 package com.anvesh.store1.repositories;
 
+import com.anvesh.store1.dtos.ProductSummary;
+import com.anvesh.store1.dtos.ProductSummaryDTO;
+import com.anvesh.store1.entities.Category;
 import com.anvesh.store1.entities.Product;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -69,4 +72,21 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
     @Modifying
     @Query("update Product p set p.price= :newPrice where p.category.id = :categoryId ")
     void updatePriceByCategory(int categoryId,BigDecimal newPrice);
+
+//    List<Product> findByCategory(Category category);
+//will use dtos to retrieve particular column values
+    //projections with derived queries
+//        List<ProductSummary> findByCategory(Category category); // WITH INTERFACE
+//    List<ProductSummaryDTO> findByCategory(Category category);// WITH CLASS only @query annotation should be used doesn't work with derived queries
+
+    //Projections with custom queries
+    //FOR INTERFACES
+//    @Query("select p.id,p.name from Product p where p.category = :category")
+//    List<ProductSummary> findByCategory(@Param("category") Category category); // WITH INTERFACE
+    //FOR CLASSES
+    @Query("SELECT new com.anvesh.store1.dtos.ProductSummaryDTO(p.id, p.name) " +
+            "FROM Product p WHERE p.category = :category")
+    List<ProductSummaryDTO> findByCategory(@Param("category") Category category);
+
+
 }
