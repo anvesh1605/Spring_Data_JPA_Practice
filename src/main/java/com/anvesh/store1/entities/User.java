@@ -65,6 +65,7 @@ public class User {
         profile.setUser(this);
     }
 
+    //oneToMany and manyToMany always use Lazy loading
     @ManyToMany
     @JoinTable(
             name = "wishlist",

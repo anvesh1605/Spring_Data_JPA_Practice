@@ -78,7 +78,8 @@ public class Store1Application {
         var service = context.getBean(UserService.class);
 //        service.manageProducts();
 //        service.updateProductPrices();
-          service.fetchProducts();
+//          service.fetchProducts();
+        service.fetchUser();
     }
 
 }
