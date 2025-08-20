@@ -81,7 +81,8 @@ public class Store1Application {
 //          service.fetchProducts();
 //        service.fetchUser();
 //        service.fetchProfiles();
-        service.fetchProductsByCriteria();
+//        service.fetchProductsByCriteria();
+        service.fetchCategoryByCriteria("prod",null,null);
     }
 
 }

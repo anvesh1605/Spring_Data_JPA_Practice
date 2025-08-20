@@ -3,6 +3,7 @@ package com.anvesh.store1.services;
 import com.anvesh.store1.dtos.UserSummary;
 import com.anvesh.store1.entities.*;
 import com.anvesh.store1.repositories.*;
+import com.anvesh.store1.repositories.specifications.ProductSpec;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 import org.apache.catalina.Store;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -210,5 +212,22 @@ public class UserService {
     {
         var products = productRepository.findProductsByCriteria(null,BigDecimal.valueOf(1),BigDecimal.valueOf(10));//the values are optional
         products.forEach(System.out::println);
+    }
+
+    public void fetchCategoryByCriteria(String name,BigDecimal minPrice,BigDecimal maxPrice)// optional parameters
+    {
+        Specification<Product> spec = Specification.where(null); // this is the neutral starting point
+
+        if (name != null) {
+            spec = spec.and(ProductSpec.hasName(name));
+        }
+        if (minPrice != null) {
+            spec = spec.and(ProductSpec.hasPriceGreaterThanOrEqualTo(minPrice));
+        }
+        if (maxPrice != null) {
+            spec = spec.and(ProductSpec.hasPriceLessThanOrEqualTo(maxPrice));
+        }
+        productRepository.findAll(spec).forEach(System.out::println);
+
     }
 }
