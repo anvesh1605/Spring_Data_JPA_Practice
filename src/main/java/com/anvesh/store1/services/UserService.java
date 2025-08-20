@@ -9,8 +9,7 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.apache.catalina.Store;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.*;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -216,18 +215,36 @@ public class UserService {
 
     public void fetchCategoryByCriteria(String name,BigDecimal minPrice,BigDecimal maxPrice)// optional parameters
     {
-        Specification<Product> spec = Specification.where(null); // this is the neutral starting point
+//        Specification<Product> spec = Specification.where(null); // this is the neutral starting point
+//
+//        if (name != null) {
+//            spec = spec.and(ProductSpec.hasName(name));
+//        }
+//        if (minPrice != null) {
+//            spec = spec.and(ProductSpec.hasPriceGreaterThanOrEqualTo(minPrice));
+//        }
+//        if (maxPrice != null) {
+//            spec = spec.and(ProductSpec.hasPriceLessThanOrEqualTo(maxPrice));
+//        }
+//        productRepository.findAll(spec).forEach(System.out::println);
 
-        if (name != null) {
-            spec = spec.and(ProductSpec.hasName(name));
-        }
-        if (minPrice != null) {
-            spec = spec.and(ProductSpec.hasPriceGreaterThanOrEqualTo(minPrice));
-        }
-        if (maxPrice != null) {
-            spec = spec.and(ProductSpec.hasPriceLessThanOrEqualTo(maxPrice));
-        }
-        productRepository.findAll(spec).forEach(System.out::println);
+    }
+    public void fetchSortedProducts()  //for sorted data
+    {
+        var sort =Sort.by("name").and(
+                Sort.by("price").descending()
+        );
+        productRepository.findAll(sort).forEach(System.out::println);
+    }
+    public void fetchPaginatedProducts(int page,int size)
+    {
+        PageRequest pageRequest = PageRequest.of(page,size);
+        Page<Product> page1 = productRepository.findAll(pageRequest);
+        page1.getContent().forEach(System.out::println);
+        var totalPages = page1.getTotalPages();
+        var totalElements = page1.getTotalElements();
+        System.out.println(totalPages);
+        System.out.println(totalElements);
 
     }
 }

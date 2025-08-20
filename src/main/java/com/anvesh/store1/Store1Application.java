@@ -82,7 +82,9 @@ public class Store1Application {
 //        service.fetchUser();
 //        service.fetchProfiles();
 //        service.fetchProductsByCriteria();
-        service.fetchCategoryByCriteria("prod",null,null);
+//        service.fetchCategoryByCriteria("prod",null,null);
+//        service.fetchSortedProducts();
+        service.fetchPaginatedProducts(0,10);
     }
 
 }
