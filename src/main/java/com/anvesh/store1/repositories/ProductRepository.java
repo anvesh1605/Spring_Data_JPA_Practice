@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 //public interface ProductRepository extends CrudRepository<Product, Long>
-public interface ProductRepository extends JpaRepository<Product, Long>
+public interface ProductRepository extends JpaRepository<Product, Long>,ProductCriteriaRepository
 {
 
 //    List<Product> findByName(Long name);
